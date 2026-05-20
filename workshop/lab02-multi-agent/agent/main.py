@@ -3,7 +3,6 @@
 import json
 import os
 
-import httpx
 from agent_framework import Agent, AgentExecutor, WorkflowBuilder, tool
 from agent_framework.foundry import FoundryChatClient
 from agent_framework_foundry_hosting import ResponsesHostServer
@@ -130,27 +129,17 @@ async def search_microsoft_learn_for_plan(
     query = " ".join(part for part in [skill, role, "learning path module"] if part).strip()
     query = query or "job skills learning path"
 
-    # Use REQUESTS_CA_BUNDLE / SSL_CERT_FILE env vars if set (corporate CA bundles);
-    # fall back to verify=False so the lab works on networks with SSL inspection.
-    ssl_verify = os.getenv("REQUESTS_CA_BUNDLE") or os.getenv("SSL_CERT_FILE") or False
     try:
-        async with httpx.AsyncClient(
-            verify=ssl_verify,
-            follow_redirects=True,
-            timeout=httpx.Timeout(30.0, read=300.0),
-        ) as http_client:
-            async with streamable_http_client(
-                MICROSOFT_LEARN_MCP_ENDPOINT, http_client=http_client
-            ) as (
-                read_stream,
-                write_stream,
-                _,
-            ):
-                async with ClientSession(read_stream, write_stream) as session:
-                    await session.initialize()
-                    result = await session.call_tool(
-                        "microsoft_docs_search", {"query": query}
-                    )
+        async with streamable_http_client(MICROSOFT_LEARN_MCP_ENDPOINT) as (
+            read_stream,
+            write_stream,
+            _,
+        ):
+            async with ClientSession(read_stream, write_stream) as session:
+                await session.initialize()
+                result = await session.call_tool(
+                    "microsoft_docs_search", {"query": query}
+                )
 
         if not result.content:
             return "No results returned. Fallback: https://learn.microsoft.com/training/support/catalog-api"
