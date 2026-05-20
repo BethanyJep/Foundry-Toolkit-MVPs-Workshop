@@ -33,9 +33,10 @@ sequenceDiagram
 
 ### Option A: Using the VS Code task (recommended)
 
-1. Press `Ctrl+Shift+P` → type **Tasks: Run Task** → select **Run Lab02 HTTP Server**.
-2. The task starts the server with debugpy attached on port `5679` and the agent on port `8088`.
-3. Wait for the output to show:
+1. Open `workshop/lab02-multi-agent/PersonalCareerCopilot/` as your VS Code folder.
+2. Press `Ctrl+Shift+P` → type **Tasks: Run Task** → select **Run Agent/Workflow HTTP Server**.
+3. The task starts the server with debugpy attached on port `5679` and the agent on port `8088`.
+4. Wait for the output to show:
 
 ```
 INFO:resume-job-fit:Starting Resume -> Job Fit Evaluator HTTP server...
@@ -69,7 +70,7 @@ python -m debugpy --listen 127.0.0.1:5679 -m agentdev run main.py --verbose --po
 ### Option C: Using F5 (debug mode)
 
 1. Press `F5` or go to **Run and Debug** (`Ctrl+Shift+D`).
-2. Select the **Lab02 - Multi-Agent** launch configuration from the dropdown.
+2. Select **Debug Local Multi-Agent Workflow** from the dropdown.
 3. The server starts with full breakpoint support.
 
 > **Tip:** Debug mode lets you set breakpoints inside `search_microsoft_learn_for_plan()` to inspect MCP responses, or inside agent instruction strings to see what each agent receives.

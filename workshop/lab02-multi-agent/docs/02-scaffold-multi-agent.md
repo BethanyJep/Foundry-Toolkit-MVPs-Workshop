@@ -109,7 +109,7 @@ resume-job-fit-evaluator/
 └── requirements.txt    ← Python dependencies
 ```
 
-> **Workshop note:** In the workshop repository, the `.vscode/` folder is at the **workspace root** with shared `launch.json` and `tasks.json`. The debug configurations for Lab 01 and Lab 02 are both included. When you press F5, select **"Lab02 - Multi-Agent"** from the dropdown.
+> **Workspace note:** Open the generated `resume-job-fit-evaluator/` folder (or `PersonalCareerCopilot/` in this repo) directly in VS Code so you can use that folder's local `.vscode/launch.json` and `.vscode/tasks.json`.
 
 ---
 

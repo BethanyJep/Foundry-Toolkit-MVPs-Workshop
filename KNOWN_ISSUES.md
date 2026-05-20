@@ -6,7 +6,17 @@ This document tracks known issues with the current repository state.
 
 ---
 
-## Current Package Pins (all three agents)
+## Current Package Pins
+
+### Lab 01 (`workshop/lab01-single-agent/agent/`) — migrated to GA SDK
+
+| Package | Constraint |
+|---------|------------|
+| `agent-framework` | `>=1.1.0` |
+| `agent-framework-foundry-hosting` | latest |
+| `debugpy` | latest |
+
+### ExecutiveAgent & Lab 02 (`ExecutiveAgent/`, `workshop/lab02-multi-agent/PersonalCareerCopilot/`) — still on rc3 pins
 
 | Package | Current Version |
 |---------|----------------|
@@ -14,13 +24,13 @@ This document tracks known issues with the current repository state.
 | `agent-framework-core` | `1.0.0rc3` |
 | `azure-ai-agentserver-agentframework` | `1.0.0b16` |
 | `azure-ai-agentserver-core` | `1.0.0b16` |
-| `agent-dev-cli` | `--pre` *(fixed - see KI-003)* |
+| `agent-dev-cli` | stable *(fixed - see KI-003)* |
 
 ---
 
 ## KI-001 - GA 1.0.0 Upgrade Blocked: `agent-framework-azure-ai` Removed
 
-**Status:** Open | **Severity:** 🔴 High | **Type:** Breaking
+**Status:** Partially fixed | **Severity:** 🔴 High | **Type:** Breaking
 
 ### Description
 
@@ -30,10 +40,13 @@ in the GA release (1.0.x; latest GA 1.0.1, released 2026-04-10). It is replaced 
 - `agent-framework-foundry==1.0.1` - Foundry-hosted agent pattern
 - `agent-framework-openai==1.0.1` - OpenAI-backed agent pattern
 
-All three `main.py` files import `AzureAIAgentClient` from `agent_framework.azure`, which
-raises `ImportError` under GA packages. The `agent_framework.azure` namespace still exists
-in GA but now contains only Azure Functions classes (`DurableAIAgent`,
-`AzureAISearchContextProvider`, `CosmosHistoryProvider`) - not Foundry agents.
+`ExecutiveAgent/main.py` and `PersonalCareerCopilot/main.py` still import `AzureAIAgentClient`
+from `agent_framework.azure`, which raises `ImportError` under GA packages. The
+`agent_framework.azure` namespace still exists in GA but now contains only Azure Functions
+classes - not Foundry agents.
+
+> ✅ **Lab 01 fixed:** `workshop/lab01-single-agent/agent/main.py` has been migrated to
+> `FoundryChatClient` + `Agent` + `ResponsesHostServer` (`agent-framework>=1.1.0`).
 
 ### Confirmed error (`.venv_ga_test`)
 
@@ -44,11 +57,10 @@ ImportError: cannot import name 'AzureAIAgentClient' from 'agent_framework.azure
 
 ### Files affected
 
-| File | Line |
-|------|------|
-| `ExecutiveAgent/main.py` | 15 |
-| `workshop/lab01-single-agent/agent/main.py` | 15 |
-| `workshop/lab02-multi-agent/PersonalCareerCopilot/main.py` | 22 |
+| File | Line | Status |
+|------|------|--------|
+| `workshop/lab01-single-agent/agent/main.py` | 15 | ✅ Fixed |
+| `workshop/lab02-multi-agent/PersonalCareerCopilot/main.py` | 22 | 🔴 Open |
 
 ---
 
@@ -63,8 +75,10 @@ ImportError: cannot import name 'AzureAIAgentClient' from 'agent_framework.azure
 forces pip to **downgrade** `agent-framework-core` back to `rc3`, which then breaks
 `agent-framework-foundry==1.0.1` and `agent-framework-openai==1.0.1`.
 
-The `from azure.ai.agentserver.agentframework import from_agent_framework` call used by all
-agents to bind the HTTP server is therefore also blocked.
+The `from azure.ai.agentserver.agentframework import from_agent_framework` call used by
+`ExecutiveAgent/main.py` and `PersonalCareerCopilot/main.py` to bind the HTTP server is
+therefore also blocked. Lab 01 (`workshop/lab01-single-agent/agent/`) has migrated to
+`ResponsesHostServer` from `agent_framework_foundry_hosting` and is not affected.
 
 ### Upstream tracking
 
@@ -73,7 +87,7 @@ agents to bind the HTTP server is therefore also blocked.
 | microsoft/agent-framework | [#5273](https://github.com/microsoft/agent-framework/issues/5273) | ✅ Closed 2026-04-21 - fix submitted to azure-sdk-for-python |
 | Azure/azure-sdk-for-python | [#46324](https://github.com/Azure/azure-sdk-for-python/issues/46324) | 🔴 Open - new `azure-ai-agentserver-agentframework` release pending |
 
-Workshop stays pinned at rc3 until azure-sdk-for-python#46324 ships.
+Lab 01 has already migrated to `agent-framework>=1.1.0` and is unaffected.
 
 ### Confirmed dependency conflict (`.venv_ga_test`)
 

@@ -140,7 +140,7 @@ workshop/
 
 - [ ] Lab 01 is fully completed (all 8 modules, agent deployed and verified)
 - [ ] `az account show` returns your subscription
-- [ ] Microsoft Foundry and Foundry Toolkit extensions are installed and responding
+- [ ] Foundry Toolkit (and Foundry commands in VS Code) is installed and responding
 - [ ] Foundry project has a deployed model (e.g., `gpt-4.1-mini`)
 - [ ] You have **Azure AI User** role on the project
 - [ ] You've read the multi-agent concepts section above and understand WorkflowBuilder, MCP, and agent orchestration

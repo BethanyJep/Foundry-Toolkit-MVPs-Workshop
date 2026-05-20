@@ -24,9 +24,9 @@ Before deploying, verify every item below:
    - Open `PersonalCareerCopilot/agent.yaml` and verify:
      ```yaml
      environment_variables:
-       - name: PROJECT_ENDPOINT
+          - name: AZURE_AI_PROJECT_ENDPOINT
          value: ${PROJECT_ENDPOINT}
-       - name: MODEL_DEPLOYMENT_NAME
+          - name: AZURE_AI_MODEL_DEPLOYMENT_NAME
          value: ${MODEL_DEPLOYMENT_NAME}
      ```
    - These must match the env vars your `main.py` reads.
@@ -38,7 +38,7 @@ Before deploying, verify every item below:
    azure-ai-agentserver-agentframework==1.0.0b16
    azure-ai-agentserver-core==1.0.0b16
    debugpy
-   agent-dev-cli --pre
+   agent-dev-cli
    ```
 
 ---
@@ -184,7 +184,7 @@ Error: Could not find a version that satisfies the requirement agent-dev-cli
 
 **Fix:** The `--pre` flag in `requirements.txt` is handled differently in Docker. Ensure your `requirements.txt` has:
 ```
-agent-dev-cli --pre
+agent-dev-cli
 ```
 
 If Docker still fails, create a `pip.conf` or pass `--pre` via a build argument. See [Module 8](08-troubleshooting.md).

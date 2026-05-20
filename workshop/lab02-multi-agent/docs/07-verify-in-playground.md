@@ -55,7 +55,7 @@ If any environment variable is misconfigured, RBAC differs, or MCP outbound is b
 
 ## Option A: Test in VS Code Playground (recommended first)
 
-The [Foundry extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.vscode-ai-foundry) includes an integrated Playground that lets you chat with your deployed agent without leaving VS Code.
+Foundry Toolkit includes an integrated Playground that lets you chat with your deployed agent without leaving VS Code.
 
 ### Step 1: Navigate to your hosted agent
 

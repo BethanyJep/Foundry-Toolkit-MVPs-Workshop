@@ -80,7 +80,7 @@ The multi-agent workflow requires specific package versions. Mismatched versions
 | `agent-framework-azure-ai` | `1.0.0rc3` | `pip show agent-framework-azure-ai` |
 | `azure-ai-agentserver-agentframework` | `1.0.0b16` | `pip show azure-ai-agentserver-agentframework` |
 | `azure-ai-agentserver-core` | `1.0.0b16` | `pip show azure-ai-agentserver-core` |
-| `agent-dev-cli` | latest pre-release | `pip show agent-dev-cli` |
+| `agent-dev-cli` | latest stable | `pip show agent-dev-cli` |
 | Python | 3.10+ | `python --version` |
 
 ### Common version errors
@@ -95,8 +95,8 @@ pip install agent-framework-core==1.0.0rc3 agent-framework-azure-ai==1.0.0rc3
 **`agent-dev-cli` not found or Inspector incompatible:**
 
 ```powershell
-# Fix: install with --pre flag
-pip install agent-dev-cli --pre --upgrade
+# Fix: install/update stable package
+pip install agent-dev-cli --upgrade
 ```
 
 **`AttributeError: module 'mcp.client' has no attribute 'streamable_http'`**

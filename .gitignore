@@ -110,6 +110,8 @@ StyleCopReport.xml
 *.vssscc
 .builds
 *.pidb
+*venv*
+*pycache*
 *.svclog
 *.scc
 
