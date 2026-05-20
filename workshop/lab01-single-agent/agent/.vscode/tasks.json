@@ -7,7 +7,7 @@
             "command": "debug-check-prerequisites",
             "args": {
                 "portOccupancy": [5679, 8088],
-                "pyPackageInstalled": ["agent-framework", "debugpy"]
+                "pyPackageInstalled": ["agent-framework", "debugpy", "agent-framework-foundry-hosting"]
             }
         },
         {

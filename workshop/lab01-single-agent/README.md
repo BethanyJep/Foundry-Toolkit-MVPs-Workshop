@@ -65,7 +65,7 @@ Complete the tutorial modules before starting this lab:
 6. Select the model you deployed (e.g., `gpt-4.1-mini`).
 7. Select your Foundry workspace.
 8. Save to the `workshop/lab01-single-agent/agent/` folder.
-9. Name it: `executive-summary-agent`.
+9. Name it: `my-agent`.
 
 A new VS Code window opens with the scaffold.
 
