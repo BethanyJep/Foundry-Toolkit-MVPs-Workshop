@@ -10,7 +10,7 @@ This module covers common errors, fixes, and debugging strategies specific to th
 |----------------|-------------|-----|
 | `RuntimeError: Missing required environment variable(s)` | `.env` file missing or values not set | Create `.env` with `AZURE_AI_PROJECT_ENDPOINT=<your-endpoint>` and `MODEL_DEPLOYMENT_NAME=<your-model>` |
 | `ModuleNotFoundError: No module named 'agent_framework'` | Virtual environment not activated or dependencies not installed | Run `.\.venv\Scripts\Activate.ps1` then `pip install -r requirements.txt` |
-| `ModuleNotFoundError: No module named 'mcp'` | MCP package not installed (missing from requirements) | Run `pip install mcp` or check `requirements.txt` includes it as a transitive dependency |
+| `ModuleNotFoundError: No module named 'mcp'` | MCP package not installed | Add `mcp` to `requirements.txt` then run `pip install -r requirements.txt` |
 | Agent starts but returns empty response | `output_executors` mismatch or missing edges | Verify `output_executors=[gap_executor]` and all edges exist in `WorkflowBuilder` |
 | Only 1 gap card (rest missing) | GapAnalyzer instructions incomplete | Add the `CRITICAL:` paragraph to `GAP_ANALYZER_INSTRUCTIONS` - see [Module 3](03-configure-agents.md) |
 | Fit score is 0 or absent | MatchingAgent didn't receive upstream data | Verify both `add_edge(resume_executor, matching_executor)` and `add_edge(jd_executor, matching_executor)` exist |
@@ -49,7 +49,7 @@ AZURE_AI_PROJECT_ENDPOINT=https://<your-project-name>.services.ai.azure.com/api/
 MODEL_DEPLOYMENT_NAME=gpt-4.1-mini
 ```
 
-> **Finding your PROJECT_ENDPOINT:** 
+> **Finding your `AZURE_AI_PROJECT_ENDPOINT`:** 
 - Open the **Microsoft Foundry** sidebar in VS Code → right-click your project → **Copy Project Endpoint**. 
 - Or go to [Azure Portal](https://portal.azure.com) → your Foundry project → **Overview** → **Project endpoint**.
 
@@ -78,6 +78,7 @@ The multi-agent workflow requires specific package versions. Mismatched versions
 |---------|-----------------|---------------|
 | `agent-framework` | `>=1.1.0` | `pip show agent-framework` |
 | `agent-framework-foundry-hosting` | latest | `pip show agent-framework-foundry-hosting` |
+| `mcp` | latest | `pip show mcp` |
 | `debugpy` | latest | `pip show debugpy` |
 | Python | 3.10+ | `python --version` |
 

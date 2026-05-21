@@ -1,24 +1,6 @@
 # Module 3 - Configure Agents, MCP Tool & Environment
 
-In this module, you customize the scaffolded multi-agent project. You'll write instructions for all four agents, set up the MCP tool for Microsoft Learn, configure environment variables, and install dependencies.
-
-```mermaid
-flowchart LR
-    subgraph "What you configure in this module"
-        ENV[".env
-        (credentials)"] --> PY["main.py
-        (agent instructions)"]
-        PY --> MCP["MCP Tool
-        (Microsoft Learn)"]
-        PY --> DEPS["requirements.txt
-        (dependencies)"]
-    end
-
-    style ENV fill:#F39C12,color:#fff
-    style PY fill:#3498DB,color:#fff
-    style MCP fill:#27AE60,color:#fff
-    style DEPS fill:#9B59B6,color:#fff
-```
+In this module, you customize the scaffolded project: write instructions for all four agents, add the MCP tool, set environment variables, and install dependencies.
 
 > **Reference:** The complete working code is in [`PersonalCareerCopilot/main.py`](../PersonalCareerCopilot/main.py). Use it as a reference while building your own.
 
@@ -86,8 +68,6 @@ Rules:
 """
 ```
 
-**Why these sections?** The MatchingAgent needs structured data to score against. Consistent sections make cross-agent handoff reliable.
-
 ### 2.2 Job Description Agent
 
 ```python
@@ -112,8 +92,6 @@ Rules:
 - If input is not a JD, return a short warning and request JD text.
 """
 ```
-
-**Why separate required vs preferred?** The MatchingAgent uses different weights for each (Required Skills = 40 points, Preferred Skills = 10 points).
 
 ### 2.3 Matching Agent
 
@@ -144,8 +122,6 @@ Rules:
 - Keep Missing Skills precise; it feeds roadmap planning.
 """
 ```
-
-**Why explicit scoring?** Reproducible scoring makes it possible to compare runs and debug issues. The 100-point scale is easy for end-users to interpret.
 
 ### 2.4 Gap Analyzer Agent
 
@@ -185,8 +161,6 @@ Rules:
 - If fit < 40, be honest and provide a staged path.
 """
 ```
-
-**Why "CRITICAL" emphasis?** Without explicit instructions to produce ALL gap cards, the model tends to generate only 1-2 cards and summarize the rest. The "CRITICAL" block prevents this truncation.
 
 ---
 
@@ -233,8 +207,8 @@ async def search_microsoft_learn_for_plan(
 
         lines = [f"Microsoft Learn resources for '{skill}':"]
         for i, item in enumerate(items, start=1):
-            title = item.get("title") or item.get("url") or "Microsoft Learn Resource"
-            url = item.get("url") or item.get("link") or ""
+            title = item.get("title") or "Microsoft Learn Resource"
+            url = item.get("contentUrl") or item.get("url") or item.get("link") or ""
             lines.append(f"{i}. {title} - {url}".rstrip(" -"))
         return "\n".join(lines)
     except Exception as ex:
@@ -258,7 +232,7 @@ async def search_microsoft_learn_for_plan(
 
 ### MCP dependencies
 
-The MCP client libraries are included transitively via [`agent-framework`](https://learn.microsoft.com/agent-framework/overview/). You do **not** need to add them to `requirements.txt` separately. If you get import errors, verify:
+The `mcp` package is an **explicit** dependency listed in `requirements.txt`. It provides `mcp.client.streamable_http`, which the GapAnalyzer tool uses to connect to the Microsoft Learn MCP server. If you get import errors, verify:
 
 ```powershell
 pip list | Select-String "mcp"
@@ -297,7 +271,7 @@ matching_executor = AgentExecutor(matching_agent,  context_mode="last_agent")
 gap_executor      = AgentExecutor(gap_analyzer,    context_mode="last_agent")
 ```
 
-`AgentExecutor` is the workflow node abstraction - `context_mode="last_agent"` means each agent only sees its direct predecessor's output. Only GapAnalyzer gets `tools=[search_microsoft_learn_for_plan]`.
+`AgentExecutor` wraps each agent into a workflow node. `context_mode="last_agent"` means each agent only sees its direct predecessor's output. Only GapAnalyzer gets `tools=[search_microsoft_learn_for_plan]`.
 
 ### 4.2 Build the workflow graph
 
@@ -318,7 +292,7 @@ workflow_agent = (
 )
 ```
 
-The `.as_agent()` call converts the built workflow into an agent interface that `ResponsesHostServer` can serve.
+`.as_agent()` converts the workflow into an agent interface that `ResponsesHostServer` can serve.
 
 ### 4.3 Start the server
 
@@ -333,7 +307,7 @@ if __name__ == "__main__":
     main()
 ```
 
-`ResponsesHostServer` handles all HTTP routing and exposes the workflow at `http://localhost:8088/responses`.
+`ResponsesHostServer` exposes the workflow at `http://localhost:8088/responses`.
 
 ---
 

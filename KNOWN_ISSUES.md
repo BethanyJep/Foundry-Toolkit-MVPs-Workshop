@@ -27,7 +27,7 @@ This document tracks known issues with the current repository state.
 
 ---
 
-## KI-005 - Teams/M365 Publish Succeeds but Agent Unreachable (BotId/ClientId Mismatch)
+## KI-001 - Teams/M365 Publish Succeeds but Agent Unreachable (BotId/ClientId Mismatch)
 
 **Status:** Open | **Severity:** 🔴 High | **Type:** Integration bug | **Ref:** [vscode-ai-toolkit#381](https://github.com/microsoft/vscode-ai-toolkit/issues/381)
 
@@ -54,31 +54,28 @@ Test using the **web chat** channel in Azure Bot Service - this path works corre
 
 ---
 
-## KI-006 - No Multi-Agent Wizard Template in AITK v1.2.1
+## KI-002 - No Dedicated Multi-Agent Template in Foundry Toolkit v1.2.1
 
 **Status:** Open | **Severity:** 🟡 Medium | **Type:** Feature gap
 
 ### Description
 
-The AITK wizard (Foundry Toolkit v1.2.1) provides the following templates under the **Response API** path:
+The Foundry Toolkit v1.2.1 wizard flow is identical for both Lab 01 and Lab 02: **Language → API Type → Template → Model → Workspace/Folder**. The template step offers:
 
 - Echo (Streaming)
 - Multi-Turn Chat
 - Note Taking
-- **Basic - Agent Framework** ← used in Lab 01
+- **Basic - Agent Framework** ← used in both Lab 01 and Lab 02
 
-There is no **Multi-Agent Workflow** template. Lab 02 uses the pre-built **`PersonalCareerCopilot/`** folder rather than a wizard-generated scaffold.
+There is no dedicated multi-agent template. The scaffold always generates a **single-agent stub** (`Agent` + `ResponsesHostServer`, no `WorkflowBuilder` code).
 
 ### Workshop impact
 
-Learners cannot use the wizard to scaffold a new multi-agent project using MAF GA. Lab 02 proceeds using the pre-existing example code directly.
+Lab 02 learners scaffold with **Basic - Agent Framework** (same as Lab 01), then replace the generated `main.py` stub with the full `WorkflowBuilder` graph (four agents, MCP tool, fan-out/fan-in edges). Lab 02 therefore points learners at the pre-built **`PersonalCareerCopilot/`** folder as the complete reference implementation.
 
 ---
 
 ## References
 
-- [agent-framework-core on PyPI](https://pypi.org/project/agent-framework-core/)
-- [agent-framework-foundry on PyPI](https://pypi.org/project/agent-framework-foundry/)
-- [microsoft/agent-framework#5273](https://github.com/microsoft/agent-framework/issues/5273) - agentserver incompatibility with MAF GA (closed)
 - [Azure/azure-sdk-for-python#46324](https://github.com/Azure/azure-sdk-for-python/issues/46324) - SDK fix pending (open)
 - [microsoft/vscode-ai-toolkit#381](https://github.com/microsoft/vscode-ai-toolkit/issues/381) - Teams/M365 publish + auth (open)

@@ -117,8 +117,7 @@ flowchart TD
     A --> C["JD Agent"]
     B -->|"parsed profile"| D["Matching Agent"]
     C -->|"parsed requirements"| D
-    D -->|"fit report + gaps"| E["Gap Analyzer
-    (+ MCP Tool)"]
+    D -->|"fit report + gaps"| E["Gap Analyzer + MCP"]
     E --> F["Final Output"]
 
     style A fill:#4A90D9,color:#fff
@@ -128,25 +127,6 @@ flowchart TD
     style E fill:#27AE60,color:#fff
     style F fill:#4A90D9,color:#fff
 ```
-
-### Execution timeline
-
-```mermaid
-gantt
-    title Agent Execution Timeline
-    dateFormat X
-    axisFormat %s
-
-    section Parallel
-    Resume Parser       :rp, 0, 3
-    JD Agent            :jd, 0, 2
-
-    section Sequential
-    Matching Agent      :ma, 3, 5
-    Gap Analyzer        :ga, 5, 9
-```
-
-> The total wall-clock time is approximately `max(ResumeParser, JD Agent) + MatchingAgent + GapAnalyzer`. GapAnalyzer is typically the slowest because it makes multiple MCP tool calls (one per gap).
 
 ---
 
