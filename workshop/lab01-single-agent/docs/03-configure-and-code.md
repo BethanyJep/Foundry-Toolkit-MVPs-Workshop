@@ -32,21 +32,21 @@ The scaffold created a `.env` file with placeholder values. Replace them with yo
 ### Path A — Foundry subscription
 
 ```env
-AZURE_AI_PROJECT_ENDPOINT=https://<your-account>.services.ai.azure.com/api/projects/<your-project>
+AZURE_AI_MODEL_DEPLOYMENT_NAME=https://<your-account>.services.ai.azure.com/api/projects/<your-project>
 MODEL_DEPLOYMENT_NAME=gpt-5-mini
 ```
 
 ### Path B — Foundry Local
 
 ```env
-AZURE_AI_PROJECT_ENDPOINT=http://localhost:5273/v1
+AZURE_AI_MODEL_DEPLOYMENT_NAME=http://localhost:5273/v1
 MODEL_DEPLOYMENT_NAME=phi-4-mini
 ```
 
 ### Path B — GitHub Models
 
 ```env
-AZURE_AI_PROJECT_ENDPOINT=https://models.inference.ai.azure.com
+AZURE_AI_MODEL_DEPLOYMENT_NAME=https://models.inference.ai.azure.com
 MODEL_DEPLOYMENT_NAME=gpt-4o-mini
 GITHUB_TOKEN=<your-github-pat>
 ```
@@ -67,7 +67,7 @@ from azure.core.credentials import AzureKeyCredential
 credential = AzureKeyCredential(os.environ["GITHUB_TOKEN"])
 
 client = FoundryChatClient(
-    project_endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
+    project_endpoint=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
     model=os.environ["MODEL_DEPLOYMENT_NAME"],
     credential=credential,
 )
@@ -154,26 +154,6 @@ agent = Agent(
     instructions=AGENT_INSTRUCTIONS,
     tools=[get_current_date],
 )
-```
-
-### Register tool with Agent
-Pass the tool in the tools parameter when constructing the Agent:
-
-``` python
-client = FoundryChatClient(
-    project_endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
-    model=os.environ["MODEL_DEPLOYMENT_NAME"],
-    credential=DefaultAzureCredential(),
-)
-
-agent = Agent(
-    client=client,
-    instructions=AGENT_INSTRUCTIONS,
-    tools=[get_current_date],
-)
-
-server = ResponsesHostServer(agent)
-server.run()
 ```
 
 ## Step 4: Create virtual environment & install dependencies

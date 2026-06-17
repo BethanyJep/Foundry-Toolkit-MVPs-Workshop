@@ -34,7 +34,7 @@ flowchart TD
 
 ### Start the debugger
 
-1. Open the **agent/** folder directly in VS Code (`File → Open Folder`).
+1. Open the **executive-summary-agent/** folder directly in VS Code (`File → Open Folder`).
 2. Open the **Run and Debug** panel (`Ctrl+Shift+D`).
 3. Select **Debug Local Agent Server** from the dropdown.
 4. Press **F5** (or click ▶ Start Debugging).
@@ -65,7 +65,7 @@ Start the agent in one terminal, send requests from another:
 
 ```bash
 # Terminal 1: Start agent
-cd agent/
+cd executive-summary-agent/
 source .venv/bin/activate
 python main.py
 ```

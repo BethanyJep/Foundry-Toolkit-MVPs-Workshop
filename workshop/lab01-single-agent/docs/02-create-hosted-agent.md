@@ -42,19 +42,26 @@ flowchart LR
 
 ## Step 2: Choose settings
 
-On the left navigation/options section select the following:
+1. On the left navigation/options section select the following:
 
-| Prompt | Selection | Notes |
+| Menu | Selection | Notes |
 |--------|-----------|-------|
 | **Language** | Python | C# also supported |
 | **Framework** | Agent Framework | Simple starting point using Agent Framework SDK |
 | **API type** | Response API | `POST /responses` — conversational, with platform-managed history |
 | **Template** | Basic | Simple starting point using Agent Framework SDK |
-| **Model** | Your deployed model (e.g., `gpt-4.1-mini`) | Path B users: select the model you added to playground |
-| **Workspace folder** | Choose a target folder | e.g., `/workspaces/Foundry-Toolkit-MVPs-Workshop/workshop/lab01-single-agent` or a subfolder in this repo |
-| **Agent name** | Enter a name | e.g., `executive-summary-agent` |
 
-Click through each prompt. The wizard creates the project and often opens it in a **new VS Code window**.
+2. Once selected, click **Next**
+
+3. In the next window, select the following:
+
+| Menu | Selection | Notes |
+|--------|-----------|-------|
+| **Workspace folder** | Choose a target folder | e.g., `/workspaces/Foundry-Toolkit-MVPs-Workshop/` or a subfolder in this repo |
+| **Agent name** | Enter a name | e.g., `executive-summary-agent` |
+| **Environment Setup** | skip setup fot now |  |
+
+Click **create** to create our agent. A new folder will be created with the hosted agent name.
 
 ## Step 3: Inspect the generated project
 
