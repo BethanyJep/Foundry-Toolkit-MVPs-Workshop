@@ -56,7 +56,7 @@ GITHUB_TOKEN=<your-github-pat>
 > **Security:** Never commit `.env` to version control. It should be in `.gitignore`.
 
 ### Path B — Code Change
-No code changes are required! The agent now automatically detects if you are using a `GITHUB_TOKEN` for GitHub Models or `DefaultAzureCredential` for Azure/Foundry Local.
+No code changes are required! The agent now automatically detects if you are using a `GITHUB_TOKEN` for GitHub Models, `DefaultAzureCredential` for Azure, or Foundry Local (which requires no sign-in).
 
 ---
 
