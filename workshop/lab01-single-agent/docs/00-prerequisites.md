@@ -70,10 +70,10 @@ In this workshop, you'll go from zero to a fully hosted agent — or stop at loc
 
 Install each tool below. After installing, verify it works by running the check command.
 
-| # | Tool | Version | Install | Verify |
-|---|------|---------|---------|--------|
+| # | Tool | Version | Install | Verify (Expected Output) |
+|---|------|---------|---------|---------------------------|
 | 1 | **Visual Studio Code** | Latest | [code.visualstudio.com](https://code.visualstudio.com/) | Opens without errors |
-| 2 | **Python** | 3.12 or higher| [python.org/downloads](https://www.python.org/downloads/) | `python --version` |
+| 2 | **Python** | 3.12 or higher| [python.org/downloads](https://www.python.org/downloads/) | `python --version` $\rightarrow$ `Python 3.12.x` |
 | 3 | **Foundry Toolkit for VS Code** | Latest | Extension ID: `ms-windows-ai-studio.windows-ai-studio` | Foundry icon in Activity Bar |
 | 4 | **Python extension for VS Code** | Latest | Extension ID: `ms-python.python` | Installed in Extensions panel |
 

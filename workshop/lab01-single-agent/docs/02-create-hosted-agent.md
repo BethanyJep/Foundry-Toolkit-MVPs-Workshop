@@ -38,6 +38,9 @@ flowchart LR
 1. Press `Ctrl+Shift+P` to open the **Command Palette**.
 2. Type: **Foundry Toolkit: Create new Hosted Agent** and select it.
 
+> **Alternative: Create via Foundry Portal**
+> If you prefer the browser, you can create your project at [https://ai.azure.com](https://ai.azure.com). Once the project is provisioned, return to VS Code and use the **Foundry Toolkit** sidebar to connect to it.
+
 > **Alternative:** Click the **+** icon next to **Hosted Agents (Preview)** in the Foundry Toolkit sidebar.
 
 ## Step 2: Choose settings

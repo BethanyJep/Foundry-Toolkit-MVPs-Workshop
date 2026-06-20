@@ -100,10 +100,20 @@ Notes:
 def main():
     logger.info("Starting executive summary hosted agent")
 
+    # Handle authentication based on provided tokens
+    github_token = os.getenv("GITHUB_TOKEN")
+    if github_token:
+        from azure.core.credentials import AzureKeyCredential
+        credential = AzureKeyCredential(github_token)
+        logger.info("Using GitHub Token for authentication")
+    else:
+        credential = DefaultAzureCredential()
+        logger.info("Using DefaultAzureCredential for authentication")
+
     client = FoundryChatClient(
-        project_endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
-        model=os.environ["MODEL_DEPLOYMENT_NAME"],
-        credential=DefaultAzureCredential(),
+        project_endpoint=os.getenv("AZURE_AI_PROJECT_ENDPOINT", "http://localhost:8080/api/projects/local"),
+        model=os.getenv("AZURE_AI_MODEL_DEPLOYMENT_NAME", "gpt-4.1-mini"),
+        credential=credential,
     )
 
     agent = Agent(

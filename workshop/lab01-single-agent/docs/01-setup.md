@@ -28,6 +28,16 @@ In this module, you install and verify the Foundry Toolkit extension, create (or
 2. Verify: `az --version` (expect 2.80.0+).
 3. Sign in: `az login`
 
+### Sign in via VS Code (Alternative)
+1. Click the **Accounts** icon (person silhouette) in the bottom-left corner of VS Code.
+2. Select **Sign in to use Microsoft Foundry**.
+
+### Service Principal Auth (Enterprise/CI)
+For locked-down environments, set these environment variables in your `.env` file:
+- `AZURE_TENANT_ID`
+- `AZURE_CLIENT_ID`
+- `AZURE_CLIENT_SECRET`
+
 ### Azure Developer CLI (azd)
 
 1. Install: `winget install microsoft.azd` (Windows) or see [install docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd).
@@ -61,6 +71,15 @@ Docker is only needed if you want to build containers locally. The Foundry exten
 
 Your hosted agent needs an AI model to generate responses.
 
+#### Model Selection Matrix
+Depending on your needs, you can choose from different model tiers:
+
+| Model | Best for | Cost | Notes |
+|-------|----------|------|-------|
+| `gpt-4.1` | High-quality, nuanced responses | Higher | Best results, recommended for final testing |
+| `gpt-4.1-mini` | Fast iteration, lower cost | Lower | Good for workshop development and rapid testing |
+| `gpt-4.1-nano` | Lightweight tasks | Lowest | Most cost-effective, but simpler responses |
+
 1. Press `Ctrl+Shift+P` → **Foundry Toolkit: Open Model Catalog** (or click **Model Catalog** in the sidebar under DEVELOPER TOOLS → Discover).
 2. Search for **gpt-4.1** in the catalog.
 3. Find **OpenAI GPT-4.1-mini** (or `gpt-5-mini` for better quality) and click **Deploy**.
@@ -83,6 +102,17 @@ After deployment, note these two values (you'll need them in Module 03):
 ### Assign RBAC role
 
 > ⚠️ **This is the most commonly missed step.** Without the correct role, deployment in Module 05 will fail.
+
+#### Which role do I need?
+Depending on your scenario, you need the following role combinations:
+
+| Scenario | Required roles | Where to assign them |
+|----------|---------------|----------------------|
+| Create new Foundry project | **Azure AI Owner** on Foundry resource | Foundry resource in Azure Portal |
+| Deploy to existing project (new resources) | **Azure AI Owner** + **Contributor** on subscription | Subscription + Foundry resource |
+| Deploy to fully configured project | **Reader** on account + **Azure AI User** on project | Account + Project in Azure Portal |
+
+**Key point:** Azure `Owner` and `Contributor` roles only cover *management* permissions. You need **Azure AI User** (or higher) for *data actions* like `agents/write` required to create and deploy agents.
 
 1. Open [portal.azure.com](https://portal.azure.com).
 2. Search for your **Foundry project** name → click the result of type **"Foundry Toolkit project"** (NOT the parent account).
@@ -109,20 +139,20 @@ Choose **one** of the following:
 Foundry Local lets you run AI models on your own machine — no cloud account needed. You can access Foundry Local models using Foundry Toolkit through the model catalog as follows:
 
 1. Go to the Foundry Toolkit extension.
-1. In the Foundry Toolkit navigation go to **Developer Tools** > and select **Model Catalog**
-1. In the new window, select **local** from the navigation bar. 
-1. Scroll down to **Phi 4 Mini,** and click the **add button** a pop up will appear indicating model is being downloaded.
-1. Once the model is downloaded, you can proceed to the next step.
+2. In the Foundry Toolkit navigation go to **Developer Tools** > and select **Model Catalog**
+3. In the new window, select **local** from the navigation bar. 
+4. Scroll down to **Phi 4 Mini,** and click the **add button** a pop up will appear indicating model is being downloaded.
+5. Once the model is downloaded, you can proceed to the next step.
 
 ### Option 2: GitHub Models (free tier)
 
 GitHub Models provides free access to AI models via your GitHub account. GitHub models using Foundry Toolkit through the model catalog as follows:
 
 1. Go to the Foundry Toolkit extension.
-1. In the Foundry Toolkit navigation go to **Developer Tools** > and select **Model Catalog**
-1. In the new window, select **GitHub** from the navigation bar. 
-1. Scroll down to **gpt-4.1-Mini,** and click the **add button** a pop up will appear indicating model is being added.
-1. Once the model is downloaded, you can proceed to the next step.
+2. In the Foundry Toolkit navigation go to **Developer Tools** > and select **Model Catalog**
+3. In the new window, select **GitHub** from the navigation bar. 
+4. Scroll down to **gpt-4.1-Mini,** and click the **add button** a pop up will appear indicating model is being added.
+5. Once the model is downloaded, you can proceed to the next step.
 
 </details>
 
