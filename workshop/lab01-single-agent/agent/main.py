@@ -100,10 +100,34 @@ Notes:
 def main():
     logger.info("Starting executive summary hosted agent")
 
+    # Require endpoint and model env vars
+    endpoint = os.getenv("AZURE_AI_PROJECT_ENDPOINT")
+    model = os.getenv("AZURE_AI_MODEL_DEPLOYMENT_NAME")
+
+    if not endpoint or not model:
+        raise ValueError("Missing required environment variables: AZURE_AI_PROJECT_ENDPOINT and AZURE_AI_MODEL_DEPLOYMENT_NAME must be set.")
+
+    # Determine authentication based on the endpoint
+    if endpoint == "https://models.inference.ai.azure.com":
+        github_token = os.getenv("GITHUB_TOKEN")
+        if not github_token:
+            raise ValueError("GITHUB_TOKEN is required when using GitHub Models endpoint.")
+        from azure.core.credentials import AzureKeyCredential
+        credential = AzureKeyCredential(github_token)
+        logger.info("Using GitHub Token for authentication")
+    elif endpoint == "http://localhost:5273/v1":
+        # Foundry Local: Intended to work without Azure sign-in.
+        # We use DefaultAzureCredential as a safe fallback.
+        credential = DefaultAzureCredential()
+        logger.info("Using DefaultAzureCredential (placeholder) for Foundry Local")
+    else:
+        credential = DefaultAzureCredential()
+        logger.info("Using DefaultAzureCredential for Azure Foundry project")
+
     client = FoundryChatClient(
-        project_endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
-        model=os.environ["MODEL_DEPLOYMENT_NAME"],
-        credential=DefaultAzureCredential(),
+        project_endpoint=endpoint,
+        model=model,
+        credential=credential,
     )
 
     agent = Agent(

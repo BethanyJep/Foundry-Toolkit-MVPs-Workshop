@@ -39,6 +39,12 @@ flowchart TD
 3. Select **Debug Local Agent Server** from the dropdown.
 4. Press **F5** (or click ▶ Start Debugging).
 
+> ⚠️ **Critical: Select your Python Interpreter**
+> If you get "ModuleNotFoundError" or the debugger fails to start, you must tell VS Code to use your virtual environment:
+> 1. Press `Ctrl+Shift+P` $\rightarrow$ type **Python: Select Interpreter**.
+> 2. Select the interpreter located in your project's `.venv` folder (e.g., `.\.venv\Scripts\python.exe` on Windows).
+> 3. Restart the debug session.
+
 ### What happens
 
 1. The HTTP server starts on `http://localhost:8088/responses`.

@@ -76,9 +76,9 @@ An **"Explain Like I'm an Executive"** agent that:
 
 When you're ready to deploy to the cloud:
 1. Get an Azure subscription ([azure.microsoft.com/free](https://azure.microsoft.com/free/))
-2. Complete [Module 01, Steps 2–4](01-setup.md#step-2-connect-or-create-a-foundry-project) (create project, deploy model, assign RBAC)
+2. Complete [Module 01, Setup](01-setup.md#step-2-set-up-based-on-your-access) (create project, deploy model, assign RBAC)
 3. Update your `.env` with the Foundry project endpoint
-4. Revert `main.py` to use `DefaultAzureCredential()` instead of API key auth
+4. Remove the `GITHUB_TOKEN` from your `.env` file to switch back to Azure authentication
 5. Continue from [Module 05 — Deploy to Foundry](05-deploy-to-foundry.md)
 
 ---

@@ -32,48 +32,31 @@ The scaffold created a `.env` file with placeholder values. Replace them with yo
 ### Path A — Foundry subscription
 
 ```env
-AZURE_AI_MODEL_DEPLOYMENT_NAME=https://<your-account>.services.ai.azure.com/api/projects/<your-project>
-MODEL_DEPLOYMENT_NAME=gpt-5-mini
+AZURE_AI_PROJECT_ENDPOINT=https://<your-account>.services.ai.azure.com/api/projects/<your-project>
+AZURE_AI_MODEL_DEPLOYMENT_NAME=gpt-4.1-mini
 ```
 
 ### Path B — Foundry Local
 
 ```env
-AZURE_AI_MODEL_DEPLOYMENT_NAME=http://localhost:5273/v1
-MODEL_DEPLOYMENT_NAME=phi-4-mini
+AZURE_AI_PROJECT_ENDPOINT=http://localhost:5273/v1
+AZURE_AI_MODEL_DEPLOYMENT_NAME=phi-4-mini
 ```
 
 ### Path B — GitHub Models
 
 ```env
-AZURE_AI_MODEL_DEPLOYMENT_NAME=https://models.inference.ai.azure.com
-MODEL_DEPLOYMENT_NAME=gpt-4o-mini
+AZURE_AI_PROJECT_ENDPOINT=https://models.inference.ai.azure.com
+AZURE_AI_MODEL_DEPLOYMENT_NAME=gpt-4o-mini
 GITHUB_TOKEN=<your-github-pat>
 ```
 
-> **Where to find values:** See [Module 01, Step 3](01-setup.md#step-3-deploy-a-model-path-a-only) (Path A) or [Module 01, Step 5](01-setup.md#step-5-configure-your-model-endpoint-path-b-only) (Path B).
+> **Where to find values:** See [Module 01, Deploy a Model](01-setup.md#deploy-a-model--assign-rbac) (Path A) or [Module 01, Setup based on your access](01-setup.md#step-2-set-up-based-on-your-access) (Path B).
 
 > **Security:** Never commit `.env` to version control. It should be in `.gitignore`.
 
-### Path B — Code change for API key auth
-
-If using GitHub Models (which requires an API key instead of `DefaultAzureCredential`), update the client initialization in `main.py`:
-
-```python
-import os
-from azure.core.credentials import AzureKeyCredential
-
-# Replace the DefaultAzureCredential() line with:
-credential = AzureKeyCredential(os.environ["GITHUB_TOKEN"])
-
-client = FoundryChatClient(
-    project_endpoint=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
-    model=os.environ["MODEL_DEPLOYMENT_NAME"],
-    credential=credential,
-)
-```
-
-> **Foundry Local** users: Foundry Local's OpenAI-compatible endpoint does not require authentication. You can pass a placeholder credential or use `DefaultAzureCredential()` — Foundry Local will accept any token locally.
+### Path B — Code Change
+No code changes are required! The agent now automatically detects if you are using a `GITHUB_TOKEN` for GitHub Models, `DefaultAzureCredential` for Azure, or Foundry Local (which requires no sign-in).
 
 ---
 

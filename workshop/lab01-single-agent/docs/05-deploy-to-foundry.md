@@ -34,7 +34,7 @@ flowchart LR
 Before deploying, verify:
 
 - [ ] Agent passes all 3 local scenarios from [Module 04](04-test-locally.md)
-- [ ] You have the **Azure AI User** role at the project level ([Module 01, Step 4](01-setup.md#step-4-assign-rbac-role-path-a-only))
+- [ ] You have the **Azure AI User** role at the project level ([Module 01, Assign RBAC](01-setup.md#deploy-a-model--assign-rbac))
 - [ ] You're signed into Azure in VS Code (Accounts icon shows your name)
 
 ---
@@ -99,7 +99,7 @@ The wizard prompts you for:
 
 | Error | Root cause | Fix |
 |-------|-----------|-----|
-| `agents/write` permission denied | Missing **Azure AI User** role at project level | [Module 01, Step 4](01-setup.md#step-4-assign-rbac-role-path-a-only) |
+| `agents/write` permission denied | Missing **Azure AI User** role at project level | [Module 01, Assign RBAC](01-setup.md#deploy-a-model--assign-rbac) |
 | Docker not running | Docker Desktop not started | Start Docker Desktop → verify `docker info` |
 | ACR authorization | Managed identity can't pull image | See [Module 08 — Troubleshooting](08-troubleshooting.md) |
 
