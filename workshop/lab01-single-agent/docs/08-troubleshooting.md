@@ -81,7 +81,7 @@ docker build --platform linux/amd64 -t myagent:v1 .
 
 ### 4.1 Model deployment not found
 
-**Fix:** The name is **case-sensitive**. Compare `.env` → `MODEL_DEPLOYMENT_NAME` with the exact name in the Foundry sidebar → Models.
+**Fix:** The name is **case-sensitive**. Compare `.env` → `AZURE_AI_MODEL_DEPLOYMENT_NAME` with the exact name in the Foundry sidebar → Models.
 
 ### 4.2 Unexpected model output
 
