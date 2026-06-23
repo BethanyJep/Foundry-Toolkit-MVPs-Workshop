@@ -2,7 +2,7 @@
 
 ⏱️ ~10 min
 
-> ⚠️ **Path B users:** This module requires a Foundry subscription. If you're using Foundry Local or GitHub Models, skip to [Module 07 — Summary](07-summary.md). You've successfully completed the local development workflow!
+> ⚠️ **Path B users:** This module requires a Foundry subscription. If you're using Foundry Local, skip to [Module 07 — Summary](07-summary.md). You've successfully completed the local development workflow!
 
 In this module, you deploy your locally-tested agent to Microsoft Foundry as a **Hosted Agent**. The deployment builds a container image, pushes it to Azure Container Registry, and starts the agent in Foundry's managed infrastructure.
 

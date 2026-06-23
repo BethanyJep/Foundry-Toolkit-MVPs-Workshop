@@ -111,7 +111,7 @@ Check container logs in the sidebar. Common causes:
 
 ---
 
-## 6. Path B — Foundry Local / GitHub Models
+## 6. Path B — Foundry Local
 
 ### 6.1 Foundry Local won't start
 
@@ -128,15 +128,6 @@ Check container logs in the sidebar. Common causes:
 | Slow responses | Expected — local models run on CPU unless you have a GPU. Be patient. |
 | Poor quality output | Try a larger model if your hardware allows. `phi-4-mini` is a good balance. |
 | Connection refused | Verify Foundry Local is running: `foundry local status`. Restart if needed. |
-
-### 6.3 GitHub Models issues
-
-| Issue | Fix |
-|-------|-----|
-| 401 Unauthorized | Regenerate your PAT at [github.com/settings/tokens](https://github.com/settings/tokens). Ensure correct scopes. |
-| 429 Rate Limited | Free tier has limits. Wait a few minutes or upgrade to a paid tier. |
-| Model not available | Check [github.com/marketplace/models](https://github.com/marketplace/models) for current model list. |
-| Timeout | GitHub Models has occasional latency. Retry after 30 seconds. |
 
 ---
 

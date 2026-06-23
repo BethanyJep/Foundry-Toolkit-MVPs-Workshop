@@ -41,7 +41,7 @@ An **"Explain Like I'm an Executive"** agent that:
 - [x] Deployed to Foundry Agent Service (containerized)
 - [x] Verified in cloud playground with 4 edge-case/safety tests
 
-### Path B (Foundry Local / GitHub Models)
+### Path B (Foundry Local)
 
 - [x] Set up Foundry Toolkit with a local model endpoint
 - [x] Scaffolded a hosted agent project
@@ -77,9 +77,8 @@ An **"Explain Like I'm an Executive"** agent that:
 When you're ready to deploy to the cloud:
 1. Get an Azure subscription ([azure.microsoft.com/free](https://azure.microsoft.com/free/))
 2. Complete [Module 01, Setup](01-setup.md#step-2-set-up-based-on-your-access) (create project, deploy model, assign RBAC)
-3. Update your `.env` with the Foundry project endpoint
-4. Remove the `GITHUB_TOKEN` from your `.env` file to switch back to Azure authentication
-5. Continue from [Module 05 — Deploy to Foundry](05-deploy-to-foundry.md)
+3. Update your `.env` with the Foundry project endpoint and model deployment name
+4. Continue from [Module 05 — Deploy to Foundry](05-deploy-to-foundry.md)
 
 ---
 

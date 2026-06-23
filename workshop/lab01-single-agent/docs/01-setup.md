@@ -28,15 +28,31 @@ In this module, you install and verify the Foundry Toolkit extension, create (or
 2. Verify: `az --version` (expect 2.80.0+).
 3. Sign in: `az login`
 
-### Sign in via VS Code (Alternative)
-1. Click the **Accounts** icon (person silhouette) in the bottom-left corner of VS Code.
-2. Select **Sign in to use Microsoft Foundry**.
+### Authentication Options
 
-### Service Principal Auth (Enterprise/CI)
-For locked-down environments, set these environment variables in your `.env` file:
-- `AZURE_TENANT_ID`
-- `AZURE_CLIENT_ID`
-- `AZURE_CLIENT_SECRET`
+The [Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/overview/) uses [`DefaultAzureCredential`](https://learn.microsoft.com/azure/developer/python/sdk/authentication/credential-chains#defaultazurecredential-overview) which tries multiple authentication methods in order. Choose the one that fits your environment:
+
+#### Option 1: VS Code Accounts (recommended for workshops)
+1. Click the **Accounts** icon (person silhouette) in the bottom-left corner of VS Code.
+2. Select **Sign in to use Microsoft Foundry** (or **Sign in with Azure**).
+3. A browser opens — sign in with the Azure account that has access to your subscription.
+4. Return to VS Code. You should see your account name in the bottom-left.
+
+#### Option 2: Azure CLI
+```bash
+az login
+az account set --subscription "<your-subscription-id>"
+```
+
+#### Option 3: Service Principal (Enterprise/CI)
+For locked-down environments or CI/CD pipelines, set these environment variables in your `.env` file:
+```env
+AZURE_TENANT_ID=<your-tenant-id>
+AZURE_CLIENT_ID=<your-client-id>
+AZURE_CLIENT_SECRET=<your-client-secret>
+```
+
+> **How `DefaultAzureCredential` works:** It tries environment variables first, then managed identity, then VS Code sign-in, then Azure CLI — and uses whichever succeeds first. See [credential chain docs](https://learn.microsoft.com/azure/developer/python/sdk/authentication/credential-chains#defaultazurecredential-overview).
 
 ### Azure Developer CLI (azd)
 
@@ -56,6 +72,19 @@ Docker is only needed if you want to build containers locally. The Foundry exten
 1. Sign in at [portal.azure.com](https://portal.azure.com).
 2. Navigate to **Subscriptions** and confirm at least one is **Active**.
 3. Note your **Subscription ID** — you'll need it in Module 01.
+
+#### RBAC Scenario Table
+
+[Hosted Agent](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agents) deployment requires **data action** permissions that standard Azure `Owner` and `Contributor` roles do **not** include. Use the table below to determine which roles you need:
+
+| Scenario | Required roles | Where to assign them |
+|----------|---------------|----------------------|
+| Create new Foundry project | **Azure AI Owner** on Foundry resource | Foundry resource in Azure Portal |
+| Deploy to existing project (new resources) | **Azure AI Owner** + **Contributor** on subscription | Subscription + Foundry resource |
+| Deploy to fully configured project | **Reader** on account + **Azure AI User** on project | Account + Project in Azure Portal |
+| Local testing only (no deployment) | **Azure AI User** on project | Project in Azure Portal |
+
+> **Key point:** Azure `Owner` and `Contributor` roles only cover *management* permissions (ARM operations). You need [**Azure AI User**](https://learn.microsoft.com/azure/foundry/concepts/rbac-foundry#built-in-roles) (or higher) for *data actions* like `agents/write` which is required to create and deploy agents.
 
 ## Connect or create a Foundry project
 
@@ -132,9 +161,7 @@ Depending on your scenario, you need the following role combinations:
 <details>
 <summary><strong>🅱️ Path B — Local / free-tier (no Azure subscription needed)</strong></summary>
 
-Choose **one** of the following:
-
-### Option 1: Foundry Local (recommended for Path B)
+### Foundry Local
 
 Foundry Local lets you run AI models on your own machine — no cloud account needed. You can access Foundry Local models using Foundry Toolkit through the model catalog as follows:
 
@@ -142,16 +169,6 @@ Foundry Local lets you run AI models on your own machine — no cloud account ne
 2. In the Foundry Toolkit navigation go to **Developer Tools** > and select **Model Catalog**
 3. In the new window, select **local** from the navigation bar. 
 4. Scroll down to **Phi 4 Mini,** and click the **add button** a pop up will appear indicating model is being downloaded.
-5. Once the model is downloaded, you can proceed to the next step.
-
-### Option 2: GitHub Models (free tier)
-
-GitHub Models provides free access to AI models via your GitHub account. GitHub models using Foundry Toolkit through the model catalog as follows:
-
-1. Go to the Foundry Toolkit extension.
-2. In the Foundry Toolkit navigation go to **Developer Tools** > and select **Model Catalog**
-3. In the new window, select **GitHub** from the navigation bar. 
-4. Scroll down to **gpt-4.1-Mini,** and click the **add button** a pop up will appear indicating model is being added.
 5. Once the model is downloaded, you can proceed to the next step.
 
 </details>
@@ -165,9 +182,9 @@ GitHub Models provides free access to AI models via your GitHub account. GitHub 
 - [ ] `python --version` shows 3.10+
 - [ ] Foundry Toolkit icon visible in VS Code Activity Bar
 - [ ] **Path A:** `az login` succeeds, subscription is Active
-- [ ] **Path B:** Foundry Local is running (`foundry local status`) OR you have a GitHub Models PAT
+- [ ] **Path B:** Foundry Local is running (`foundry local status`)
 - [ ] **Path A:** Foundry project visible in sidebar, model deployed, Azure AI User role assigned
-- [ ] **Path B:** Foundry Local running with a model OR GitHub PAT ready with model name
+- [ ] **Path B:** Foundry Local running with a model
 - [ ] You have noted your **endpoint** and **model deployment name**
 
 

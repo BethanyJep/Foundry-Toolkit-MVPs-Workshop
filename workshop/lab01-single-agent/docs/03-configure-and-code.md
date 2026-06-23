@@ -43,20 +43,9 @@ AZURE_AI_PROJECT_ENDPOINT=http://localhost:5273/v1
 AZURE_AI_MODEL_DEPLOYMENT_NAME=phi-4-mini
 ```
 
-### Path B — GitHub Models
-
-```env
-AZURE_AI_PROJECT_ENDPOINT=https://models.inference.ai.azure.com
-AZURE_AI_MODEL_DEPLOYMENT_NAME=gpt-4o-mini
-GITHUB_TOKEN=<your-github-pat>
-```
-
 > **Where to find values:** See [Module 01, Deploy a Model](01-setup.md#deploy-a-model--assign-rbac) (Path A) or [Module 01, Setup based on your access](01-setup.md#step-2-set-up-based-on-your-access) (Path B).
 
 > **Security:** Never commit `.env` to version control. It should be in `.gitignore`.
-
-### Path B — Code Change
-No code changes are required! The agent now automatically detects if you are using a `GITHUB_TOKEN` for GitHub Models, `DefaultAzureCredential` for Azure, or Foundry Local (which requires no sign-in).
 
 ---
 
@@ -191,7 +180,6 @@ az account show --query "{name:name, id:id}" -o table
 ### Path B — No auth needed for local testing
 
 - **Foundry Local:** No authentication required.
-- **GitHub Models:** The `GITHUB_TOKEN` in `.env` handles auth.
 
 ---
 
@@ -204,7 +192,7 @@ az account show --query "{name:name, id:id}" -o table
 - [ ] Virtual environment created and activated
 - [ ] `pip install -r requirements.txt` completed without errors
 - [ ] **Path A:** `az account show` succeeds OR you're signed into VS Code
-- [ ] **Path B:** `GITHUB_TOKEN` set (if GitHub Models) OR Foundry Local running
+- [ ] **Path B:** Foundry Local running
 
 ---
 

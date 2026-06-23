@@ -2,7 +2,7 @@
 
 ⏱️ ~10 min
 
-> ⚠️ **Path B users:** This module requires a deployed hosted agent. If you're using Foundry Local or GitHub Models, skip to [Module 07 — Summary](07-summary.md).
+> ⚠️ **Path B users:** This module requires a deployed hosted agent. If you're using Foundry Local, skip to [Module 07 — Summary](07-summary.md).
 
 In this module, you test your **deployed** hosted agent with edge-case and safety boundary tests. Module 04 validated that your agent works correctly with well-formed inputs. Now you confirm it handles adversarial, ambiguous, and minimal inputs safely in the hosted environment.
 

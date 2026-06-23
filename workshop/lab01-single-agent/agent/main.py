@@ -108,14 +108,7 @@ def main():
         raise ValueError("Missing required environment variables: AZURE_AI_PROJECT_ENDPOINT and AZURE_AI_MODEL_DEPLOYMENT_NAME must be set.")
 
     # Determine authentication based on the endpoint
-    if endpoint == "https://models.inference.ai.azure.com":
-        github_token = os.getenv("GITHUB_TOKEN")
-        if not github_token:
-            raise ValueError("GITHUB_TOKEN is required when using GitHub Models endpoint.")
-        from azure.core.credentials import AzureKeyCredential
-        credential = AzureKeyCredential(github_token)
-        logger.info("Using GitHub Token for authentication")
-    elif endpoint == "http://localhost:5273/v1":
+    if endpoint == "http://localhost:5273/v1":
         # Foundry Local: Intended to work without Azure sign-in.
         # We use DefaultAzureCredential as a safe fallback.
         credential = DefaultAzureCredential()
