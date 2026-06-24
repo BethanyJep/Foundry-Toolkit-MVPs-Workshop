@@ -27,16 +27,18 @@ sequenceDiagram
 
 ## Step 1: Configure environment variables
 
-The scaffold created a `.env` file with placeholder values. Replace them with your actual values from Module 01.
+1. Open the **executive-summary-agent** in a new folder.
 
-### Path A — Foundry subscription
+1. The scaffold created a `.env` file with placeholder values. Replace them with your actual values from Module 01.
+
+### 🅰️ Path A — Foundry subscription
 
 ```env
 AZURE_AI_PROJECT_ENDPOINT=https://<your-account>.services.ai.azure.com/api/projects/<your-project>
-AZURE_AI_MODEL_DEPLOYMENT_NAME=gpt-4.1-mini
+AZURE_AI_MODEL_DEPLOYMENT_NAME=gpt-5-mini
 ```
 
-### Path B — Foundry Local
+### 🅱️ Path B — Foundry Local
 
 ```env
 AZURE_AI_PROJECT_ENDPOINT=http://localhost:5273/v1
@@ -166,7 +168,7 @@ Expected: `agent-framework` and `agent-framework-foundry-hosting` are listed.
 
 ## Step 5: Verify authentication
 
-### Path A — Azure credential
+### 🅰️ Path A — Azure credential
 
 At least one of these should work:
 
@@ -177,7 +179,7 @@ az account show --query "{name:name, id:id}" -o table
 # Or check VS Code sign-in (Accounts icon, bottom-left)
 ```
 
-### Path B — No auth needed for local testing
+### 🅱️ Path B — No auth needed for local testing
 
 - **Foundry Local:** No authentication required.
 

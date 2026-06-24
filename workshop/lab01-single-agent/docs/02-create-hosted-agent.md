@@ -45,6 +45,8 @@ flowchart LR
 
 ## Step 2: Choose settings
 
+![Create Hosted Agents](/workshop/lab01-single-agent/docs/images/02-hosted-agents-sample.jpg)
+
 1. On the left navigation/options section select the following:
 
 | Menu | Selection | Notes |
@@ -56,13 +58,15 @@ flowchart LR
 
 2. Once selected, click **Next**
 
+![Create Hosted Agents](/workshop/lab01-single-agent/docs/images/02-create-hosted-agents.jpg)
+
 3. In the next window, select the following:
 
 | Menu | Selection | Notes |
 |--------|-----------|-------|
 | **Workspace folder** | Choose a target folder | e.g., `/workspaces/Foundry-Toolkit-MVPs-Workshop/` or a subfolder in this repo |
 | **Agent name** | Enter a name | e.g., `executive-summary-agent` |
-| **Environment Setup** | skip setup fot now |  |
+| **Environment Setup** | skip setup for now |  |
 
 Click **create** to create our agent. A new folder will be created with the hosted agent name.
 

@@ -29,13 +29,15 @@ Edge cases that worked locally might behave differently with a managed identity 
 3. Verify status is **Running**.
 4. Click **Playground** (or right-click → **Open in Playground**).
 
+![VS Code showing deployed agent with Playground tab](images/06-deployed-agent-playground.png)
+
 ## Option B: Test in the Foundry Portal
 
 1. Open [ai.azure.com](https://ai.azure.com) → sign in → select your project.
 2. Navigate to **Build** → **Agents** → click your agent.
 3. Click **Open in playground**.
 
-![Foundry portal showing deployed agent with Playground tab](images/07-foundry-playground-chat.png)
+![Foundry portal showing deployed agent with Playground tab](images/06-agent-in-foundry.png)
 
 ---
 

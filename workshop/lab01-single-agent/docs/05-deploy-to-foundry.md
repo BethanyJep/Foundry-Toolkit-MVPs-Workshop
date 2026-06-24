@@ -56,21 +56,36 @@ If the Agent Inspector is open (from testing):
 
 The wizard prompts you for:
 
+![Project Config](images/05-foundry-project-setup.png)
+
 | Prompt | Selection |
 |--------|-----------|
+| **Subscription** | Your Azure Subscription |
 | **Target project** | Your Foundry project (e.g., `workshop-agents`) |
+
+Click **next** to configure your agent.
+
+![Basics config](images/05-configure-basics.png)
+
+| Prompt | Selection |
+|--------|-----------|
+| **Deployment Method** | Container |
 | **Container registry** | **Default ACR** (Microsoft Foundry creates and manages one for you) |
+| **Deploy to** | New Agent (name, `executive-summary-agent`) |
+
+Click **next** to review and deploy your agent.
+
+![Review and deploy](images/05-review-deploy.png)
+
+| Prompt | Selection |
+|--------|-----------|
 | **CPU and memory** | **0.25 CPU cores, 0.5 Gi memory** (sufficient for workshop) |
-
-![Container Registry selection showing Default ACR highlighted](images/06-deploy-acr-selection.png)
-
-![CPU and memory configuration picker with 0.25 CPU highlighted](images/06-deploy-cpu-memory.png)
 
 ---
 
 ## Step 3: Deploy and monitor
 
-1. Click **Confirm and Deploy**.
+1. Click **Deploy**.
 2. Watch the **Output** panel (select **Microsoft Foundry** from the dropdown).
 3. The deployment runs through these stages:
    - **Docker build** — builds container from your Dockerfile
@@ -83,7 +98,7 @@ The wizard prompts you for:
 
 5. Click **Run agent** to open the Agent Playground.
 
-![Deployment success showing Agent Playground with Running status](images/06-deploy-success.png)
+![Deployment success showing Agent Playground with Running status](images/05-deployed-asset.png)
 
 ### Deployment status values
 

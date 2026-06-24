@@ -89,6 +89,8 @@ curl -sS -X POST http://localhost:8088/responses \
 
 Run **all three** scenarios below. These validate that your agent produces correct, structured output for realistic inputs.
 
+![Example of Local testing](/workshop/lab01-single-agent/docs/images/04-local-testing.png)
+
 ### Scenario 1: IT Incident — API latency spike
 
 **Input:**
