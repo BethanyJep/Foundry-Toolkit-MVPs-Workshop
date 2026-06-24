@@ -35,7 +35,7 @@ sequenceDiagram
 
 ```env
 AZURE_AI_PROJECT_ENDPOINT=https://<your-account>.services.ai.azure.com/api/projects/<your-project>
-AZURE_AI_MODEL_DEPLOYMENT_NAME=gpt-5-mini
+AZURE_AI_MODEL_DEPLOYMENT_NAME=gpt-5-mini (or gpt-4.1-mini)
 ```
 
 ### 🅱️ Path B — Foundry Local
@@ -98,6 +98,7 @@ Executive Summary:
 - What happened: <plain-language description>
 - Business impact: <clear, non-technical impact>
 - Next step: <clear action or mitigation>
+- Date: <current date in YYYY-MM-DD format>
 
 Rules:
 - Keep responses under 100 words

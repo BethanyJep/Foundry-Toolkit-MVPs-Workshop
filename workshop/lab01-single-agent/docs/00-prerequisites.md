@@ -22,7 +22,7 @@ flowchart LR
 **The agent uses:**
 - **Microsoft Agent Framework** — for agent logic and structure
 - **Foundry Toolkit for VS Code** — to scaffold, test locally, and deploy
-- **An AI model** (e.g., `gpt-4.1-mini`) — to generate the summaries
+- **An AI model** (e.g., `gpt-4.1-mini/gpt-5-mini`) — to generate the summaries
 
 By the end of this lab, you'll have a working agent that you can test locally via the Agent Inspector, and optionally deploy to the cloud.
 
@@ -53,7 +53,7 @@ In this workshop, you'll go from zero to a fully hosted agent — or stop at loc
 | | Details |
 |---|---|
 | **Who is this for?** | You have an active Azure subscription and can create Foundry resources |
-| **Model** | Azure OpenAI via Foundry (e.g., `gpt-4.1-mini`) |
+| **Model** | Azure OpenAI via Foundry (e.g., `gpt-4.1-mini/gpt-5-mini`) |
 | **Modules covered** | All modules (00–07) |
 | **Deploy to cloud?** | ✅ Yes — full end-to-end deployment |
 

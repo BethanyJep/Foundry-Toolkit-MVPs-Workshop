@@ -106,7 +106,7 @@ Depending on your needs, you can choose from different model tiers:
 | Model | Best for | Cost | Notes |
 |-------|----------|------|-------|
 | `gpt-4.1` | High-quality, nuanced responses | Higher | Best results, recommended for final testing |
-| `gpt-4.1-mini` | Fast iteration, lower cost | Lower | Good for workshop development and rapid testing |
+| `gpt-4.1-mini/gpt-5-mini` | Fast iteration, lower cost | Lower | Good for workshop development and rapid testing |
 | `gpt-4.1-nano` | Lightweight tasks | Lowest | Most cost-effective, but simpler responses |
 
 1. Press `Ctrl+Shift+P` → **Foundry Toolkit: Open Model Catalog** (or click **Model Catalog** in the sidebar under DEVELOPER TOOLS → Discover).
@@ -117,7 +117,7 @@ Depending on your needs, you can choose from different model tiers:
    - **Target:** Select **Deploy to Foundry Toolkit** → choose your project.
 5. Click **Deploy** and wait 1–3 minutes.
 
-> **Recommendation:** Use `gpt-4.1-mini` for the workshop — fast, affordable, and produces good results.
+> **Recommendation:** Use `gpt-4.1-mini/gpt-5-mini` for the workshop — fast, affordable, and produces good results.
 
 ### Note your values
 
@@ -126,7 +126,7 @@ After deployment, note these two values (you'll need them in Module 03):
 | Value | Where to find it |
 |-------|-----------------|
 | **Project endpoint** | Click your project in the sidebar → detail view shows the URL (e.g., `https://<account>.services.ai.azure.com/api/projects/<project>`) |
-| **Model deployment name** | Expand project → **Models** → the name next to your deployed model (e.g., `gpt-4.1-mini`) |
+| **Model deployment name** | Expand project → **Models** → the name next to your deployed model (e.g., `gpt-4.1-mini/gpt-5-mini`) |
 
 ### Assign RBAC role
 

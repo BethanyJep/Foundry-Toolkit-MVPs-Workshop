@@ -41,9 +41,13 @@ flowchart TD
 
 > ⚠️ **Critical: Select your Python Interpreter**
 > If you get "ModuleNotFoundError" or the debugger fails to start, you must tell VS Code to use your virtual environment:
-> 1. Press `Ctrl+Shift+P` $\rightarrow$ type **Python: Select Interpreter**.
-> 2. Select the interpreter located in your project's `.venv` folder (e.g., `.\.venv\Scripts\python.exe` on Windows).
-> 3. Restart the debug session.
+  > 1. Press `Ctrl+Shift+P` $\rightarrow$ type **Python: Select Interpreter**.
+  > 2. Select the interpreter located in your project's `.venv` folder (e.g., `.\.venv\Scripts\python.exe` on Windows).
+  > 3. Restart the debug session.
+> If you still getting errors, manually update your file `tasks.json` as follows:
+  > 1. Navigate to `.vscode/tasks.json` file
+  > 2. Go to the command labelled: `Run Agent/Workflow HTTP Server`
+  > 3. Update the command value as follows: `"value": "${workspaceFolder}/.venv/bin/python",`
 
 ### What happens
 
@@ -161,7 +165,7 @@ For each scenario, check:
 | Empty or generic response | Review instructions in `main.py` — ensure output format is specified |
 | Response includes jargon | Strengthen "remove technical terms" rules in instructions |
 | Agent Inspector doesn't open | `Ctrl+Shift+P` → **Foundry Toolkit: Open Agent Inspector** |
-| Model errors in Terminal | Verify `MODEL_DEPLOYMENT_NAME` matches exactly (case-sensitive) |
+| Model errors in Terminal | Verify `AZURE_AI_MODEL_DEPLOYMENT_NAME` matches exactly (case-sensitive) |
 
 ---
 
